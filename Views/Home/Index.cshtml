@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>Login User</h2>
+}
+
+
+@if((await AuthorizationService.AuthorizeAsync(User, Permissions.Dashboards.Edit)).Succeeded)
+{
+    <p>Sucess Policy Result</p>
+}
